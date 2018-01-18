@@ -13,25 +13,29 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 
-let connection = mysql.createConnection({
-    host: 'localhost',
-    port: 8889,
-    user: 'root',
-    password: 'root',
-    database: 'venmo'
-})
-
-connection.connect(function(error){
-    if(error) throw error
-    console.log("connected as id " + connection.threadId);
-})
-
 app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, 'app', 'public', "home.html"));
+    console.log("Connected!")
+    res.sendFile(path.join(__dirname, 'app/public', "home.html"))
+})
+
+app.get('/:whatever?/:whooo?', function(req, res){
+    res.sendFile(path.join(__dirname,'app/public', 'home.html'))
+})
+
+app.get('/api/friends', function(req, res){
+    console.log("What is going on?")
+    res.json()
+})
+app.post('api/friends', function (req, res){
+    
+})
+
+app.get('/survey', function(req, res){
+    console.log("What is going on?")
+    res.sendFile(path.join(__dirname,'app/public', "survey.html"))
 })
 
 
-// module.exports = {
-//     express,
-//     path
-// }
+app.listen(PORT)
+
+//module.exports = {app,path}
